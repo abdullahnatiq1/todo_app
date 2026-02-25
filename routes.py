@@ -3,6 +3,7 @@ from sqlmodel import Session, select
 from db import getSession
 import bcrypt
 from model import User
+from utils import createToken
 
 
 router = APIRouter(prefix="/todo", tags=["Todo_App"])
@@ -35,5 +36,9 @@ def signIn(email : str, password : str, session : Session = Depends(getSession))
     if not passwordMatch:
         return{"message" : "Invalid password"}
     
-    return{"message" : "Login successful"}
+    token = createToken(data={"sub" : user.uuid})
+    
+    return{"message" : "Login successful",
+           "token" : token
+           }
 
