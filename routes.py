@@ -22,3 +22,18 @@ def signUp(username : str, email : str, password : str, dob : str, phoneNo : int
     session.refresh(newUser)
 
     return{"Message" : "User created successfully"}
+
+
+@router.post("/signin")
+def signIn(email : str, password : str, session : Session = Depends(getSession)):
+    user = session.exec(select(User).where (User.email == email)).first()
+
+    if not user:
+        return{"message" : "Email not found"}
+    
+    passwordMatch = bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8'))
+    if not passwordMatch:
+        return{"message" : "Invalid password"}
+    
+    return{"message" : "Login successful"}
+
