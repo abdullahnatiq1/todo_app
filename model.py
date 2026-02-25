@@ -1,11 +1,11 @@
-from sqlmodel import SQLModel, Field, Relationship
+from sqlmodel import SQLModel, Field, Relationship, Column, Integer
 import uuid
 from typing import Optional
 
 class User(SQLModel, table = True):
     __tablename__ = "users"
-    id : int = Field(default = None, sa_column_kwargs = {"autoincrement" : True, "unique" : True})
-    uuid : str = Field(default_factory = lambda : str (uuid.uuid4()), primary_key = True)
+    id : int = Field(sa_column = Column(Integer, autoincrement = True, unique = True, primary_key = True))
+    uuid : str = Field(default_factory = lambda : str (uuid.uuid4()))
     
     todos : list["Todo"] = Relationship(back_populates ="owner" )
     
@@ -17,9 +17,9 @@ class User(SQLModel, table = True):
 
 class Todo(SQLModel, table = True):
     __tablename__ = "todos"
-    id : int = Field(default = None, sa_column_kwargs = {"autoincrement" : True, "unique" : True})
+    id :int = Field(sa_column = Column(Integer, autoincrement = True, unique = True, primary_key = True))
     
-    user_uuid : str = Field(foreign_key = "users.uuid", primary_key = True)
+    user_id : int = Field(foreign_key = "users.id")
     
     title : str 
     description : str

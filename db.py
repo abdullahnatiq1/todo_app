@@ -24,3 +24,10 @@ def getSession():
     """
     with Session(engine) as session:
         yield session
+
+def reset_database():
+    print("Dropping all tables...")
+    SQLModel.metadata.drop_all(engine)
+    print("Creating all tables with correct auto-incrementing IDs...")
+    SQLModel.metadata.create_all(engine)
+    print("Database ready.")
