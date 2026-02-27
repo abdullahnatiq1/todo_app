@@ -9,3 +9,14 @@ def createToken(data : dict):
     data.update({"exp" : expire})
     token = jwt.encode(data, SECRET_KEY, algorithm=algorithm)
     return token
+
+def verifyToken(token : str):
+    try:
+        payload = jwt.decode(token , SECRET_KEY, algorithms=[algorithm])
+        return payload
+    except jwt.ExpiredSignatureError:
+        return None
+    except jwt.JWTError:
+        return None
+
+    

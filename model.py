@@ -26,3 +26,6 @@ class Todo(SQLModel, table = True):
     
     owner : Optional["User"] = Relationship(back_populates = "todos")
 
+class TodoCreate(SQLModel):
+    title : str
+    description : str
