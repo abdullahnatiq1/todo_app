@@ -10,7 +10,7 @@ def func(user : str):
 @app.on_event("startup")
 def onStartup():
     createDBandTables()
-    # reset_database()
+    #reset_database()
 
 
 app.include_router(user_router)

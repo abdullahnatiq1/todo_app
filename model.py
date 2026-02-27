@@ -4,7 +4,7 @@ from typing import Optional
 
 class User(SQLModel, table = True):
     __tablename__ = "users"
-    id : int = Field(sa_column = Column(Integer, autoincrement = True, unique = True, primary_key = True))
+    id : Optional[int] = Field(sa_column = Column(Integer, autoincrement = True, unique = True, primary_key = True))
     uuid : str = Field(default_factory = lambda : str (uuid.uuid4()))
     
     todos : list["Todo"] = Relationship(back_populates ="owner" )
@@ -13,11 +13,11 @@ class User(SQLModel, table = True):
     email : str = Field(unique = True)
     password : str
     dob : str
-    phoneNo : int = Field(unique = True)
+    phoneNo : str = Field(unique = True)
 
 class Todo(SQLModel, table = True):
     __tablename__ = "todos"
-    id :int = Field(sa_column = Column(Integer, autoincrement = True, unique = True, primary_key = True))
+    id :Optional[int] = Field(sa_column = Column(Integer, autoincrement = True, unique = True, primary_key = True))
     
     user_id : int = Field(foreign_key = "users.id")
     
