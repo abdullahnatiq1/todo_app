@@ -1,6 +1,20 @@
 # Todo List App
 
-My Todo List App is build in FastAPI helps the user to store there tasks with tokenization
+A RESTful API backend for a Todo application built with FastAPI and PostgreSQL.
+
+## Features
+
+User authentication with signup and signin
+
+Passwords are securely hashed using bcrypt
+
+JWT token based authentication
+
+Full CRUD operations for todos (Create, Read, Update, Delete)
+
+Each user can only access and manage their own todos
+
+Database managed with SQLModel and PostgreSQL
 
 # Get Started
 
