@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Header
+from fastapi import APIRouter, Depends, Header  # 
 from sqlmodel import Session, select
 from db import getSession
 import bcrypt
@@ -83,7 +83,7 @@ def getAllTodos(session : Session = Depends(getSession), currentUser : User = De
     return{"todos" : todos}
     
 
-@router.put("/update/{todoID}")
+@router.patch("/update/{todoID}")   # put sara data change kr deta hai or == sirf field ko change krta haiii
 def updateTodo(todoID : int, title : Optional[str] = None, description : Optional[str] = None, session : Session = Depends(getSession), currentUser : User = Depends(getCurrentUser)):
     todo = session.exec(select(Todo).where(Todo.id == todoID, Todo.user_id == currentUser.id)).first()
 
