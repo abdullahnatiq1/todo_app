@@ -26,6 +26,29 @@ class Todo(SQLModel, table = True):
     
     owner : Optional["User"] = Relationship(back_populates = "todos")
 
+
+
 class TodoCreate(SQLModel):
     title : str
     description : str
+
+
+# title : Optional[str] = None, description : Optional[str] = None,
+
+class UpdateTodo(SQLModel):
+    title : Optional[str] 
+    description : Optional[str] 
+
+
+class SigninRequest(SQLModel):
+    email: str
+    password: str
+
+
+# username : str, email : str, password : str, dob : str, phoneNo : int,
+class SignupRequest(SQLModel):
+    username : str
+    email : str 
+    password : str
+    dob : str
+    phoneNo : int
