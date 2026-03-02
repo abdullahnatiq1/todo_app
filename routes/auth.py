@@ -7,7 +7,7 @@ import bcrypt
 from utils import createToken
 
 
-router = APIRouter(prefix="/auth", tags=["Todo_app_Routes"])
+router = APIRouter(prefix="/auth", tags=["Authorization"])
 
 
 @router.get("/me")

@@ -4,22 +4,20 @@ from routes1 import router as user_router
 # from middleware import authMiddleware
 from fastapi.openapi.utils import get_openapi
 from routes import auth_router
-
+from routes import todo_router
 
 app = FastAPI()
-@app.get("/hello")
-def func():
-    return {'message': "Welcome to todo app"}
 
 @app.on_event("startup")
 def onStartup():
     createDBandTables()
     #reset_database()
 
-
 # app.middleware("http")(authMiddleware)
 app.include_router(user_router)
 app.include_router(auth_router)
+app.include_router(todo_router)
+
 
 def customOpenAPI():
     if app.openapi_schema:
